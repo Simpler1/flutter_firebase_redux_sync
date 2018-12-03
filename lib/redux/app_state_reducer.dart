@@ -3,13 +3,13 @@ import 'package:firebase_redux_sync/redux/app_state.dart';
 import 'package:redux/redux.dart';
 
 AppState appStateReducer(AppState state, dynamic action) {
-  return new AppState(
+  return AppState(
     counter: counterReducer(state.counter, action),
   );
 }
 
 final counterReducer = combineReducers<int>([
-  new TypedReducer<int, CounterOnDataEventAction>(_setCounter),
+  TypedReducer<int, CounterOnDataEventAction>(_setCounter),
 ]);
 
 int _setCounter(int oldCounter, CounterOnDataEventAction action) {

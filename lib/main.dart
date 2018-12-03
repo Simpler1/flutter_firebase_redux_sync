@@ -7,25 +7,25 @@ import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux_epics/redux_epics.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  final store = new Store<AppState>(
+  final store = Store<AppState>(
     appStateReducer,
-    initialState: new AppState(),
-    middleware: [new EpicMiddleware(allEpics)]
+    initialState: AppState(),
+    middleware: [EpicMiddleware(allEpics)]
   );
 
   @override
   Widget build(BuildContext context) {
-    return new StoreProvider(
+    return StoreProvider(
       store: store,
-      child: new MaterialApp(
+      child: MaterialApp(
         title: 'Flutter: Firebase & Redux in sync',
-        theme: new ThemeData(
+        theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: new MyHomePage(title: 'Flutter: Firebase & Redux in sync'),
+        home: MyHomePage(title: 'Flutter: Firebase & Redux in sync'),
       ),
     );
   }
@@ -38,32 +38,32 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new StoreBuilder(
-      onInit: (store) => store.dispatch(new RequestCounterDataEventsAction()),
-      onDispose: (store) => store.dispatch(new CancelCounterDataEventsAction()),
+    return StoreBuilder(
+      onInit: (store) => store.dispatch(RequestCounterDataEventsAction()),
+      onDispose: (store) => store.dispatch(CancelCounterDataEventsAction()),
       builder: (context, Store<AppState> store) {
-        return new Scaffold(
-          appBar: new AppBar(
-            title: new Text(title),
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(title),
           ),
-          body: new Center(
-            child: new Column(
+          body: Center(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                new Text('You have pushed the button this many times:'),
-                new Text(
+                Text('You have pushed the button this many times:'),
+                Text(
                   '${store.state.counter}',
                   style: Theme.of(context).textTheme.display1,
                 ),
               ],
             ),
           ),
-          floatingActionButton: new FloatingActionButton(
+          floatingActionButton: FloatingActionButton(
             onPressed: () {
-              store.dispatch(new IncrementCounterAction());
+              store.dispatch(IncrementCounterAction());
             },
             tooltip: 'Increment',
-            child: new Icon(Icons.add),
+            child: Icon(Icons.add),
           ),
         );
       },

@@ -8,5 +8,5 @@ class AppState {
     this.counter = 0,
   });
 
-  AppState copyWith({int counter}) => new AppState(counter: counter ?? this.counter);
+  AppState copyWith({int counter}) => AppState(counter: counter ?? this.counter);
 }
